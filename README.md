@@ -73,7 +73,7 @@ full-scan.sh 192.168.0.1
 - Full TCP Scan
   - \<IP\>_full_tcp_nmap.txt
 - Individual Port Scans
-  - \<IP\>_tcp_\<port\>_nmap.txt
+  - \<IP\>_tcp\_\<port\>_nmap.txt
 
 # Credits
 
