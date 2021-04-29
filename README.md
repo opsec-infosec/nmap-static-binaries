@@ -53,9 +53,10 @@ This script will perform the same initial scans as the scan.sh script, but will 
 
 The shell scrip is executed as follows:
 
-full-scan.sh \<IP\>
+full-scan.sh \<IP Address of Target\>
 
 As with the other scripts, the output is then archived in the output directory with the name nmap-scan-\<IP\>
+The individual port scans run the following NSE scripts: default, banner, vuln
 
 *Example*
 
