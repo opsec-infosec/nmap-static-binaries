@@ -4,7 +4,7 @@ Pivoting with static binaries
 
 # Linux Arch Types
 
-There are 2 different version of static nmap binaries, one is for x86 architectures and the other is for x64.  Included in the repository are two .gz files that have already been compiled with version 7.91 of Nmap.  If you don't need to modify the nmap version, you can just grab those two .gz files and unarchive them on your target.
+There are 2 different version of static nmap binaries, one is for x86 architectures and the other is for x64.  Included in the repository are two .gz files that have already been compiled with version 7.91 of Nmap.  If you don't need to modify the nmap version, you can just grab those two .gz files in the release area and unarchive them on your target.
 
 # Compiling
 
