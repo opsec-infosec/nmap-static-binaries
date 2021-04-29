@@ -18,7 +18,7 @@ if  [[ ! -d ./output ]]; then
 
 echo ""
 echo -e "${GREEN}[+] Scanning port ${RESET} "$2" of host " $1 "\n"
-./nmap -vv --reason -Pn -sV -p $2 --script=$3 -oN "./output/"$1"_tcp_"$2"_xxx_nmap.txt" $1
+./nmap -vv --reason -Pn -sV -p $2 --script=$3 -oN "./output/"$1"_tcp_"$2"_nmap.txt" $1
 
 cd ./output
 echo ""

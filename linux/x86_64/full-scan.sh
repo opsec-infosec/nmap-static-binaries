@@ -27,7 +27,7 @@ echo -e "${GREEN}[+] Running Full TCP Scan${RESET}"
 
 echo ""
 echo -e "${GREEN}[+] Scanning for Detailed Ports${RESET}"
-for i in $(cat ./output/$1_quick_tcp_nmap.txt | grep open | cut -d '/' -f1); do ./nmap -vv --reason -Pn -sV -p $i --script="default,banner,vuln" -oN "./output/tcp_"$i"_xxx_naap.txt" $1; done;
+for i in $(cat ./output/$1_quick_tcp_nmap.txt | grep open | cut -d '/' -f1); do ./nmap -vv --reason -Pn -sV -p $i --script="default,banner,vuln" -oN "./output/"$1"_tcp_"$i"_naap.txt" $1; done;
 
 cd ./output
 echo ""

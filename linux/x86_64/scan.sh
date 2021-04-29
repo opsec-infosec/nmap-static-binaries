@@ -21,7 +21,7 @@ echo ""
 echo -e "${GREEN}[+] Running Quick Scan${RESET}"
 ./nmap -vv --reason -Pn -sV -sC --version-all -oN "./output/"$1"_quick_tcp_nmap.txt" $1
 echo ""
-echo -e "${GREEN[+] Running Top 20 UDP${RESET}"
+echo -e "${GREEN}[+] Running Top 20 UDP${RESET}"
 ./nmap -vv --reason -Pn -sU -A --top-ports=20 --version-all -oN "./output/"$1"_top_20_udp_nmap.txt" $1
 echo ""
 echo -e "${GREEN}[+] Running Full TCP Scan${RESET}"
