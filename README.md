@@ -90,4 +90,4 @@ The build scripts are taken from Andrew-d's github page at https://github.com/an
 
 Build scripts modified by opinfosec on 28-Oct-22
 - Added removing of shared in libz
-- Updated OpenSSL to 3.0.5
+- Updated OpenSSL to 1.1.1q
