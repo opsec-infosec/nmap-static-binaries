@@ -20,7 +20,7 @@ third-party entities.
 --
 ---
 
-categories = {"discovery", "external", "safe"}
+categories = {"discovery", "safe"}
 author = "George Chatzisofroniou"
 license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 

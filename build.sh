@@ -5,15 +5,16 @@ set -o pipefail
 set -x
 
 
-NMAP_VERSION=7.91
-OPENSSL_VERSION=1.1.1k
+#NMAP_VERSION=7.91
+# Nmap is bleeding edge from git
+OPENSSL_VERSION=1.1.1q
 
 
 function build_openssl() {
     cd /build
 
     # Download
-    curl -LO https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz
+    curl -LOk https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz
     tar zxvf openssl-${OPENSSL_VERSION}.tar.gz
     cd openssl-${OPENSSL_VERSION}
 
@@ -33,9 +34,11 @@ function build_nmap() {
     DEBIAN_FRONTEND=noninteractive apt-get install -yy python
 
     # Download
-    curl -LO http://nmap.org/dist/nmap-${NMAP_VERSION}.tar.bz2
-    tar xjvf nmap-${NMAP_VERSION}.tar.bz2
-    cd nmap-${NMAP_VERSION}
+    #curl -LOk http://nmap.org/dist/nmap-${NMAP_VERSION}.tar.bz2
+    #tar xjvf nmap-${NMAP_VERSION}.tar.bz2
+    #cd nmap-${NMAP_VERSION}
+	git clone https://github.com/nmap/nmap.git
+	cd nmap
 
     # Configure
     CC='/opt/cross/x86_64-linux-musl/bin/x86_64-linux-musl-gcc -static -fPIC' \
@@ -51,6 +54,7 @@ function build_nmap() {
 
     # Don't build the libpcap.so file
     sed -i -e 's/shared\: /shared\: #/' libpcap/Makefile
+	sed -i -e 's/shared\: /shared\: #/' libz/Makefile
 
     # Build
     make -j4
@@ -65,10 +69,15 @@ function doit() {
     if [ -d /output ]
     then
         OUT_DIR=/output/`uname | tr 'A-Z' 'a-z'`/`uname -m`
-        mkdir -p $OUT_DIR
-        cp /build/nmap-${NMAP_VERSION}/nmap $OUT_DIR/
-        cp /build/nmap-${NMAP_VERSION}/ncat/ncat $OUT_DIR/
-        cp /build/nmap-${NMAP_VERSION}/nping/nping $OUT_DIR/
+        mkdir -p $OUT_DIR && mkdir -p $OUT_DIR/scripts && mkdir -p $OUT_DIR/nselib
+        #cp /build/nmap-${NMAP_VERSION}/nmap $OUT_DIR/
+        #cp /build/nmap-${NMAP_VERSION}/ncat/ncat $OUT_DIR/
+        #cp /build/nmap-${NMAP_VERSION}/nping/nping $OUT_DIR/
+		cp /build/nmap/nmap $OUT_DIR/
+        cp /build/nmap/ncat/ncat $OUT_DIR/
+        cp /build/nmap/nping/nping $OUT_DIR/
+		cp /build/nmap/scripts/* $OUT_DIR/scripts/
+		cp -R /build/nmap/nselib/* $OUT_DIR/nselib/
         echo "** Finished **"
     else
         echo "** /output does not exist **"

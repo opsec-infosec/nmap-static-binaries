@@ -4,11 +4,20 @@ Pivoting with static binaries
 
 # Linux Arch Types
 
-There are 2 different version of static nmap binaries, one is for x86 architectures and the other is for x64.  Included in the repository are two .gz files that have already been compiled with version 7.91 of Nmap.  If you don't need to modify the nmap version, you can just grab those two .gz files in the release area and unarchive them on your target.
+Updated versin of nmap is x86_64 from github
+
+There are 2 different version of static nmap binaries, one is for x86 architectures and the other is for x64.  Included in the repository are two .gz files that have already been compiled with version 7.93 of Nmap.  If you don't need to modify the nmap version, you can just grab those two .gz files in the release area and unarchive them on your target.
 
 # Compiling
 
-Included in the repository is a docker file and build.sh for compiling the static binaries.  The latest version of nmap (7.91) was used in the nmap.tar.gz archives.
+Included in the repository is a docker file and build.sh for compiling the static binaries.  The latest version of nmap (7.91) was used in the nmap.tar.gz archives for x86.
+The latest version from gitlab was used for the x86_64 version.  All previous version are also available in the archives.
+
+```sh
+docker build . -t nmap-build
+docker run --rm -v ${PWD}/:/output/ nmap-build
+```
+The executables will be in the output directory
 
 # Usage
 
@@ -48,7 +57,7 @@ scan-port.sh 192.168.0.1 80 "http*, banner, vuln"
 
 ## full-scan.sh
 
-This script will perform the same initial scans as the scan.sh script, but will also scan ports that are found by the quick scans.  
+This script will perform the same initial scans as the scan.sh script, but will also scan ports that are found by the quick scans.
 ***NOTE:*** Quick scanning will only pull the most popular ports, there for the full scan may miss some ports found by the full scan.
 
 The shell scrip is executed as follows:
@@ -78,3 +87,7 @@ full-scan.sh 192.168.0.1
 # Credits
 
 The build scripts are taken from Andrew-d's github page at https://github.com/andrew-d/static-binaries
+
+Build scripts modified by opinfosec on 28-Oct-22
+- Added removing of shared in libz
+- Updated OpenSSL to 3.0.5
